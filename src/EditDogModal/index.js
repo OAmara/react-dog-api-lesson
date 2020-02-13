@@ -1,73 +1,38 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Form, Button, Label, Modal, Header } from 'semantic-ui-react'
 // let's make our edit modal nice using semantics-ui-react
 // https://react.semantic-ui.com/modules/modal/
 
-class EditDogModal extends Component {
+function EditDogModal(props) {
 
-	constructor(props) {
-		super(props)
-
-		this.state = {
-			name: '',
-			owner: '',
-			breed: '',
-		}
-	}
-
-	componentDidMount() {
-		// notice -- in DogContainer -- we sre rendering EditDogModal all the time instead of
-		// conditionally. so 2 problems:
-		// it 'mounts' even when it isn't showing
-		// componentDidMount no longer fires when we re-open it
-		// this means our form is empty
-		this.setState({
-			name: this.props.dogToEdit.name,
-			owner: this.props.dogToEdit.owner,
-			breed: this.props.dogToEdit.breed,
-		})
-	}
-
-	handleChange = (e) => {
-		this.setState({
-			[e.target.name]: e.target.value
-		})	
-	}
-
-	handleSubmit = (e) => {
-		e.preventDefault()
-		this.props.updateDog(this.state)
-	}
-
-	render() {
 		return(
-			<Modal open={this.props.open} closeIcon onClose={this.props.closeModal}>
+			<Modal open={props.open} closeIcon onClose={props.closeModal}>
 				<Header>Edit Dog</Header>
 				<Modal.Content>
-					<Form onSubmit={this.handleSubmit}>
+					<Form onSubmit={props.handleSubmitEditForm}>
 						<Label>Name:</Label>
 						<Form.Input
 							type="text"
 							name="name"
-							value={this.state.name}
+							value={props.dogToEdit.name}
 							placeholder="Enter New Name"
-							onChange={this.handleChange}
+							onChange={props.handleEditChange}
 						/>
 						<Label>Owner:</Label>
 						<Form.Input
 							type="text"
 							name="owner"
-							value={this.state.owner}
+							value={props.dogToEdit.owner}
 							placeholder="Enter New Owner"
-							onChange={this.handleChange}
+							onChange={props.handleEditChange}
 						/>
 						<Label>Breed:</Label>
 						<Form.Input
 							type="text"
 							name="breed"
-							value={this.state.breed}
+							value={props.dogToEdit.breed}
 							placeholder="Enter New Breed"
-							onChange={this.handleChange}
+							onChange={props.handleEditChange}
 						/>
 						<Modal.Actions>
 							<Button color={'green'} type="Submit">Update Dog</Button>
@@ -76,7 +41,6 @@ class EditDogModal extends Component {
 				</Modal.Content>
 			</Modal>
 		)
-	}
 }
 
 export default EditDogModal

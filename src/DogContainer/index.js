@@ -135,7 +135,7 @@ class DogContainer extends Component {
 		// 		return false
 		// 	}
 		// }));
-		const dogToEdit = this.state.dogs.find((dog) => dog.id === this.state.idOfDogToEdit)
+		const dogToEdit = this.state.dogs.find((dog) => dog.id === idOfDogToEdit)
 		this.setState({
 			editModalOpen: true,
 			dogToEdit: {
@@ -149,14 +149,33 @@ class DogContainer extends Component {
 		})
 	}
 
-	updateDog = async (newDogInfo) => {
-		// id of dog we need is in state
-		// console.log('update dog in DogContainer, we are trying to update dog: ', this.state.idOfDogToEdit, '. to look like: ', newDogInfo);
+	handleEditChange = (e) => {
+		// this is a 100% awesome way to 
+		// const oldDog = this.state.dogToEdit
+		// oldDog[e.target.name] = e.target.value
+		// this.setState({ dogToEdit: oldDog })	
+		
+		// often React developers will use fancy new syntax like this to show off!
+		this.setState({
+			dogToEdit: {
+				...this.state.dogToEdit, // copy properties from object in state using spread operator 
+				[e.target.name]: e.target.value, // replace the old value for whatever was edited for the new value
+			}
+		})
+	}
 
-		const updateDogResponse = await fetch(process.env.REACT_APP_API_URL + '/api/v1/dogs/' + this.state.idOfDogToEdit, 
+	handleSubmitEditForm = (e) => {
+		e.preventDefault()
+		this.updateDog()
+	}
+	updateDog = async () => {
+		
+
+		// id of dog we need is in state
+		const updateDogResponse = await fetch(process.env.REACT_APP_API_URL + '/api/v1/dogs/' + this.state.dogToEdit.id, 
 			{
 				method: 'PUT',
-				body: JSON.stringify(newDogInfo),
+				body: JSON.stringify(this.state.dogToEdit),
 				headers: {
 					'Content-Type': 'application/json'
 				}
@@ -176,7 +195,7 @@ class DogContainer extends Component {
 			// })
 
 			const newDogArrayWithUpdatedDog = this.state.dogs.map((dog) => {
-				if(dog.id === this.state.idOfDogToEdit) {
+				if(dog.id === updateDogJson.data.id) {
 					return updateDogJson.data
 				} else {
 					return dog
@@ -211,6 +230,8 @@ class DogContainer extends Component {
 					dogToEdit={this.state.dogToEdit}
 					updateDog={this.updateDog}
 					closeModal={this.closeModal}
+					handleEditChange={this.handleEditChange}
+					handleSubmitEditForm={this.handleSubmitEditForm}
 				/>
 			</>
 		)
