@@ -19,7 +19,7 @@ class EditDogModal extends Component {
 		// notice -- in DogContainer -- we sre rendering EditDogModal all the time instead of
 		// conditionally. so 2 problems:
 		// it 'mounts' even when it isn't showing
-		//
+		// componentDidMount no longer fires when we re-open it
 		// this means our form is empty
 		this.setState({
 			name: this.props.dogToEdit.name,
