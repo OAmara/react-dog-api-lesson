@@ -16,6 +16,11 @@ class EditDogModal extends Component {
 	}
 
 	componentDidMount() {
+		// notice -- in DogContainer -- we sre rendering EditDogModal all the time instead of
+		// conditionally. so 2 problems:
+		// it 'mounts' even when it isn't showing
+		//
+		// this means our form is empty
 		this.setState({
 			name: this.props.dogToEdit.name,
 			owner: this.props.dogToEdit.owner,
@@ -36,7 +41,7 @@ class EditDogModal extends Component {
 
 	render() {
 		return(
-			<Modal open closeIcon onClose={this.props.closeModal}>
+			<Modal open={this.props.open} closeIcon onClose={this.props.closeModal}>
 				<Header>Edit Dog</Header>
 				<Modal.Content>
 					<Form onSubmit={this.handleSubmit}>

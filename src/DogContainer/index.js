@@ -10,7 +10,14 @@ class DogContainer extends Component {
 
 		this.state = {
 			dogs: [],
-			idOfDogToEdit: -1,
+			editModalOpen: false,
+			// this will be the data we are editing eith the form in the modal
+			dogToEdit: {
+				name: '',
+				owner: '',
+				breed: '',
+				id: '',
+			}
 		}
 	}
 
@@ -128,9 +135,17 @@ class DogContainer extends Component {
 		// 		return false
 		// 	}
 		// }));
-
+		const dogToEdit = this.state.dogs.find((dog) => dog.id === this.state.idOfDogToEdit)
 		this.setState({
-			idOfDogToEdit: idOfDogToEdit,
+			editModalOpen: true,
+			dogToEdit: {
+				...dogToEdit
+				// the line above is using the spread operator to represent the 4 lines below
+				// name: dogToEdit.name,
+				// owner: dogToEdit.owner,
+				// breed: dogToEdit.breed,
+				// id: dogToEdit.id
+			}
 		})
 	}
 
@@ -177,7 +192,7 @@ class DogContainer extends Component {
 
 	closeModal = () => {
 		this.setState({
-			idOfDogToEdit: -1
+			editModalOpen: false
 		})
 	}
 
@@ -191,17 +206,12 @@ class DogContainer extends Component {
 					editDog={this.editDog}
 				/>
 				<NewDogForm createDog={this.createDog}/>
-				{
-					this.state.idOfDogToEdit !== -1
-					?
-					<EditDogModal 
-						dogToEdit={this.state.dogs.find((dog) => dog.id === this.state.idOfDogToEdit)}
-						updateDog={this.updateDog}
-						closeModal={this.closeModal}
-					/>
-					:
-					null
-				}
+				<EditDogModal 
+					open={this.state.editModalOpen}
+					dogToEdit={this.state.dogToEdit}
+					updateDog={this.updateDog}
+					closeModal={this.closeModal}
+				/>
 			</>
 		)
 	}
