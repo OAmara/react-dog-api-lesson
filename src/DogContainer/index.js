@@ -57,6 +57,7 @@ class DogContainer extends Component {
 			// request body will be dogToAdd
 			// we also need to set a header when we send json header Content-Type: application/json
 			const createDogResponse = await fetch(process.env.REACT_APP_API_URL + '/api/v1/dogs/', {
+				credentials: 'include',
 				method: 'POST',
 				body: JSON.stringify(dogToAdd), // this is how you convert an object to JSON
 				headers: {
@@ -95,6 +96,7 @@ class DogContainer extends Component {
 	deleteDog = async (id) => {
 		try {
 			const deleteDogResponse = await fetch(process.env.REACT_APP_API_URL + '/api/v1/dogs/' + id, {
+				credentials: 'include',
 				method: 'Delete'
 			})
 			const deleteDogJson = await deleteDogResponse.json()
@@ -175,7 +177,8 @@ class DogContainer extends Component {
 
 		// id of dog we need is in state
 		const updateDogResponse = await fetch(process.env.REACT_APP_API_URL + '/api/v1/dogs/' + this.state.dogToEdit.id, 
-			{
+			{	
+				credentials: 'include',
 				method: 'PUT',
 				body: JSON.stringify(this.state.dogToEdit),
 				headers: {
