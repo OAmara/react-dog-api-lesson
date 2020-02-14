@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Form, Button, Label } from 'semantic-ui-react'
-// import 'index.css'
+ import './index.css'
 
 class LoginRegisterForm extends Component {
 	constructor(props) {
@@ -28,11 +28,20 @@ class LoginRegisterForm extends Component {
 		})
 	}
 
+	handleSubmit = (e) => {
+		e.preventDefault()
+		console.log(`You are trying to ${this.state.action}, with the following credentials`);
+		console.log(this.state);
+	}
+
 	render() {
+		// TODO: Add form validation code
+		// Highlight blank fields in red and show an error message below them -- username requried, etc
+		// BONUS TODO: use RegExp to improse requirements on password! --> (professionals do this)
 		return(
 			<div className='LoginRegisterForm'>
 				<h2 className='LoginRegisterForm-h2'>{this.state.action + ' here'}</h2>
-				<Form>
+				<Form onSubmit={this.handleSubmit}>
 				{
 					// only show username field if they are registering
 					// bc our back end only uses email
