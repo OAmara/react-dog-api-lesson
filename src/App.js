@@ -14,11 +14,28 @@ class App extends Component {
 
 	register = async (registerInfo) => {
 		console.log('register() in App.js called with the following info', registerInfo);
-		// const url = process.env.REACT_APP_URL + '/api/v1/users/register'		
-		// const registerResponse = await fetch(url, {
-		// 	method: 'POST',
-		// 	body: .json()
-		// })
+
+		 const url = process.env.REACT_APP_API_URL + '/api/v1/users/register'	
+
+		 try {
+			 const registerResponse = await fetch(url, {
+			 	// INCLUDE THIS IN EVERY FETCH CALL
+			 	// this will send your cookie, this is done automatically in express servers
+			 	// If left out, user will not be authenticated
+			 	credentials: 'include', // sneds the cookie
+			 	method: 'POST',
+			 	body: JSON.stringify(registerInfo),
+			 	headers: {
+			 		'Content-Type': 'application/json'
+			 	}
+			 })
+			 console.log(registerResponse);
+			 const registerJson = await registerResponse.json()
+			 console.log(registerJson);
+		 } catch (err) {
+		 	console.error(err)
+		 }
+
 	}
 
 	login = async (loginInfo) => {
