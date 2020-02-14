@@ -1,5 +1,6 @@
 body {
-  background-color: lightcyan;
+  /*background-color: lightcyan;*/
+  background-color: rgba(224, 255, 255, 0.4)
 }
 
 .App {
