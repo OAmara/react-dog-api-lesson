@@ -31,7 +31,7 @@ class App extends Component {
 			 })
 			 // console.log(registerResponse);
 			 const registerJson = await registerResponse.json()
-			 // console.log(registerJson);
+			  console.log(registerJson);
 		 } catch (err) {
 		 	 console.error(err)
 		 }
@@ -57,7 +57,7 @@ class App extends Component {
 			})
 			// console.log(loginResponse);
 			const loginJson = await loginResponse.json()
-			// console.log(loginJson);
+			 console.log(loginJson);
 
 			// 'log in' the user and switch the component to dog container
 			if (loginResponse.status === 200) {

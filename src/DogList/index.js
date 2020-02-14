@@ -15,7 +15,7 @@ function DogList(props) {
 				</Card.Header>
 				<Card.Description>
 					{
-
+						// previously dog.owner was a string, now it's an object created on register.
 					}
 
 					{dog.name} is a {dog.breed} that belong to {dog.owner.username}
