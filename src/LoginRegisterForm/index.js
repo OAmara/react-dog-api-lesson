@@ -30,8 +30,15 @@ class LoginRegisterForm extends Component {
 
 	handleSubmit = (e) => {
 		e.preventDefault()
-		console.log(`You are trying to ${this.state.action}, with the following credentials`);
-		console.log(this.state);
+		this.loginRegister()
+	}
+
+	loginRegister = () => {
+		if(this.state.action === 'register') {
+			this.props.register(this.state)
+		} else {
+			this.props.login(this.state)
+		}
 	}
 
 	render() {
@@ -78,7 +85,7 @@ class LoginRegisterForm extends Component {
 						placeholder='Password'
 						onChange={this.handleChange}
 					/>
-					<Button color={'teal'} type='Submit'>Log In</Button>
+					<Button color={'teal'} type='Submit'>{this.state.action === 'register' ? 'register' : 'login'}Log In</Button>
 				</Form>
 				{
 					this.state.action === 'register'
