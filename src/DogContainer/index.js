@@ -31,7 +31,10 @@ class DogContainer extends Component {
 		try {
 			// for development, URL is local:
 			// REACT_APP_API_URL=http://localhost:8000 --> placed in .env.development
-			const dogsResponse = await fetch(process.env.REACT_APP_API_URL + "/api/v1/dogs/")
+			const dogsResponse = await fetch(process.env.REACT_APP_API_URL + "/api/v1/dogs/", {
+				// you must send cookie every time for back end to know you are logged in.
+				credentials: 'include'
+			})
 			// logging the results you get back from an API and drilling down into 
 			// the object to make sure you are putting the thing you mean to be putting into state is important
 			const dogsJson = await dogsResponse.json()

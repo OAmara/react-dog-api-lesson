@@ -14,7 +14,11 @@ function DogList(props) {
 					{dog.name}
 				</Card.Header>
 				<Card.Description>
-					{dog.name} is a {dog.breed} that belong to {dog.owner}
+					{
+
+					}
+
+					{dog.name} is a {dog.breed} that belong to {dog.owner.username}
 				</Card.Description>
 			</Card.Content>
 			<Card.Content extra>
