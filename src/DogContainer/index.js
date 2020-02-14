@@ -14,7 +14,6 @@ class DogContainer extends Component {
 			// this will be the data we are editing eith the form in the modal
 			dogToEdit: {
 				name: '',
-				owner: '',
 				breed: '',
 				id: '',
 			}

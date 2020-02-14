@@ -18,14 +18,6 @@ function EditDogModal(props) {
 							placeholder="Enter New Name"
 							onChange={props.handleEditChange}
 						/>
-						<Label>Owner:</Label>
-						<Form.Input
-							type="text"
-							name="owner"
-							value={props.dogToEdit.owner}
-							placeholder="Enter New Owner"
-							onChange={props.handleEditChange}
-						/>
 						<Label>Breed:</Label>
 						<Form.Input
 							type="text"

@@ -8,7 +8,6 @@ class NewDogForm extends Component {
 	// cool thing you can do that works!
 		this.state = {
 			name: '',
-			owner: '',
 			breed: '',
 		}
 	}
@@ -25,7 +24,6 @@ class NewDogForm extends Component {
 		this.props.createDog(this.state)
 		this.setState({
 			name: '',
-			owner: '',
 			breed: '',
 		})
 	}
@@ -40,13 +38,6 @@ class NewDogForm extends Component {
 						type='text'
 						name='name'
 						value={this.state.name}
-						onChange={this.handleChange}
-					/>
-					<Label>Owner:</Label>
-					<Form.Input
-						type='text'
-						name='owner'
-						value={this.state.owner}
 						onChange={this.handleChange}
 					/>
 					<Label>Breed:</Label>
