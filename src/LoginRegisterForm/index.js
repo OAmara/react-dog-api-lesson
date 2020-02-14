@@ -79,22 +79,22 @@ class LoginRegisterForm extends Component {
 
 					<Label>Password:</Label>
 					<Form.Input
-						type='text'
+						type='password'
 						name='password'
 						value={this.state.password}
 						placeholder='Password'
 						onChange={this.handleChange}
 					/>
-					<Button color={'teal'} type='Submit'>{this.state.action === 'register' ? 'register' : 'login'}Log In</Button>
+					<Button color={'teal'} type='Submit'>{this.state.action === 'register' ? 'Register' : 'Login'}</Button>
 				</Form>
 				{
 					this.state.action === 'register'
 					?
 					// they see this on register screen
-					<small>Already have an account? Log In <span className='fake-link' onClick={this.switchForm}>Here </span></small>
+					<small>Already have an account? Log In <span className='fake-link' onClick={this.switchForm}>Here</span></small>
 					:
 					// And this on login screen
-					<small>Need an account? Sign up <span className='fake-link' onClick={this.switchForm}>Here </span>!</small>
+					<small>Need an account? Sign up <span className='fake-link' onClick={this.switchForm}>Here</span>!</small>
 				}
 			</div>
 		)
