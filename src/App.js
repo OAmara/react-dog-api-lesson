@@ -15,7 +15,7 @@ class App extends Component {
   		// console.log(process.env);
 		return (
 		    <div className="App">
-			    <h1>Dogs</h1>
+			    <h1>Dawgs</h1>
 			    { this.state.loggedIn ? <DogContainer /> : <LoginRegisterForm />}
 		    </div>
 		);

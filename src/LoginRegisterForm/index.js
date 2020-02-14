@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Form, Button, Label } from 'semantic-ui-react'
+// import 'index.css'
 
 class LoginRegisterForm extends Component {
 	constructor(props) {
@@ -9,32 +10,76 @@ class LoginRegisterForm extends Component {
 			email: '',
 			password: '',
 			username: '',
+			action: 'login', // login or register
 		}
 	}
+
+	switchForm = () => {
+		if(this.state.action === 'login') {
+			this.setState({ action: 'register' })
+		} else {
+			this.setState({ action: 'login' })
+		}
+	}
+
+	handleChange = (e) => {
+		this.setState({
+			[e.target.name]: e.target.value
+		})
+	}
+
 	render() {
 		return(
 			<div className='LoginRegisterForm'>
+				<h2 className='LoginRegisterForm-h2'>{this.state.action + ' here'}</h2>
 				<Form>
-					<Label>Username:</Label>
-					<Form.Input
-						type='text'
-						name='username'
-						value={this.state.username}
-					/>
+				{
+					// only show username field if they are registering
+					// bc our back end only uses email
+					this.state.action === 'register'
+					?
+					<React.Fragment>
+						<Label>Username:</Label>
+						<Form.Input
+							type='text'
+							name='username'
+							value={this.state.username}
+							placeholder='Desired Username'
+							onChange={this.handleChange}
+						/>
+					</React.Fragment>
+					:
+					null
+				}
 					<Label>Email:</Label>
 					<Form.Input
 						type='text'
 						name='email'
 						value={this.state.email}
+						placeholder='Your Email'
+						onChange={this.handleChange}
 					/>
+
+
 					<Label>Password:</Label>
 					<Form.Input
 						type='text'
 						name='password'
 						value={this.state.password}
+						placeholder='Password'
+						onChange={this.handleChange}
 					/>
-					<Button type='Submit'>Log In</Button>
+					<Button color={'teal'} type='Submit'>Log In</Button>
 				</Form>
+				{
+					this.state.action === 'register'
+					?
+					// they see this on register screen
+					<small>Already have an account? Log In <span className='fake-link' onClick={this.switchForm}>Here </span></small>
+					:
+					// And this on login screen
+					<small>Need an account? Sign up <span className='fake-link' onClick={this.switchForm}>Here </span>!</small>
+				}
 			</div>
 		)
 	}
